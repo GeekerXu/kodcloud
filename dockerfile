@@ -1,4 +1,4 @@
-FROM   centos7:latest
+FROM   centos
 MAINTAINER      GeekerXu "flyxuchao@gmail.com"
 RUN   yum -y update
 RUN   yum install httpd php php-cli unzip php-gd php-mbstring -y

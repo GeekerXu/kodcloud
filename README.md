@@ -17,5 +17,7 @@ wget https://raw.githubusercontent.com/GeekerXu/kodcloud/master/dockerfile && wg
 docker build -t geekerxu/kodcloud:latest .
 
 5.创建文件夹，启动容器 
+
 mkdir -p /home/kodcloud
+
 docker run -d -p 10000:80 --restart=always -v /home/kodcloud/:/var/www/html ---name kodcloud geekerxu/kodcloud

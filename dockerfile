@@ -1,6 +1,6 @@
 FROM   centos
 MAINTAINER      GeekerXu "flyxuchao@gmail.com"
-RUN yum install httpd php php-cli unzip php-gd php-mbstring -y
+RUN yum install wget httpd php php-cli unzip php-gd php-mbstring -y
 WORKDIR /var/www/html
 RUN wget http://static.kodcloud.com/update/download/kodexplorer4.40.zip
 RUN unzip kodexplorer4.40.zip

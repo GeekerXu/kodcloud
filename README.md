@@ -1,5 +1,5 @@
 # kodcloud
-KodCloud 基于Cenots7.6
+Kodexplorer 
 
 1.docker 安装
 curl -sSL https://get.docker.com/ | sh

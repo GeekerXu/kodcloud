@@ -1,8 +1,8 @@
 FROM php:7.1-alpine
 MAINTAINER      GeekerXu@"flyxuchao@gmail.com"
 
-ENV KODEXPLORER_VERSION=4.25
-ENV KODEXPLORER_URL="https://github.com/kalcaddle/KodExplorer/archive/4.25.tar.gz"
+ENV KODEXPLORER_VERSION=4.39
+ENV KODEXPLORER_URL="https://github.com/kalcaddle/KodExplorer/archive/4.39.tar.gz"
 
 RUN set -x \
   && mkdir -p /usr/src/kodexplorer \

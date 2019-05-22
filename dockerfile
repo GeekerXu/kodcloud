@@ -1,9 +1,27 @@
-FROM centos
+FROM php:7.1-apache
 MAINTAINER      GeekerXu@"flyxuchao@gmail.com"
-RUN yum install httpd -y
-RUN yum install php* -y
-RUN yum install wget unzip -y
-RUN cd /var/www/html &&  wget http://static.kodcloud.com/update/download/kodexplorer4.40.zip && unzip kodexplorer4.40.zip && chmod -Rf 777 ./*
+ENV KODEXPLORER_VERSION=4.3.9
+ENV KODEXPLORER_URL="https://github.com/kalcaddle/KodExplorer/archive/4.39.tar.gz"
+RUN set -x \
+  && mkdir -p /usr/src/kodexplorer \
+  && apt-get update && apt-get install -y --no-install-recommends ca-certificates wget && rm -rf /var/lib/apt/lists/* \
+  && wget -O /tmp/kodexplorer.tar.gz "$KODEXPLORER_URL" \
+  && tar -xzf /tmp/kodexplorer.tar.gz -C /usr/src/kodexplorer/ --strip-components=1 \
+  && apt-get purge -y --auto-remove ca-certificates wget \
+  && rm -rf /var/cache/apk/* \
+  && rm -rf /tmp/*
+RUN set -x \
+  && apt-get update && apt-get install -y \
+        libfreetype6-dev \
+        libjpeg62-turbo-dev \
+        libmcrypt-dev \
+        libpng12-dev \
+  && docker-php-ext-install -j$(nproc) iconv mcrypt \
+  && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
+  && docker-php-ext-install -j$(nproc) gd \
+  && rm -rf /var/cache/apk/*
+WORKDIR /var/www/html
+COPY entrypoint.sh /usr/local/bin/
 EXPOSE 80
-COPY init.sh /init.sh
-CMD ["/bin/bash","/init.sh"]
+ENTRYPOINT ["entrypoint.sh"]
+CMD ["apache2-foreground"]  

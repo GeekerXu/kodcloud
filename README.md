@@ -20,4 +20,4 @@ docker build -t geekerxu/kodexplorer:latest .
 
 mkdir -p /home/kodexplorer
 
-docker run -d -p 1000:80 --restart=always -v /home/kodexplorer/:/var/www/html ---name kodexplorer geekerxu/kodexplorer
+docker run -d -p 1000:80 --restart=always -v /home/kodexplorer/:/var/www/html --name kodexplorer geekerxu/kodexplorer

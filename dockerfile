@@ -19,9 +19,10 @@ RUN set -x \
   && docker-php-ext-install -j "$(getconf _NPROCESSORS_ONLN)" gd \
   && apk del --no-cache freetype-dev libpng-dev libjpeg-turbo-dev
 
-WORKDIR /var/www/html
+RUN wget -P /usr/local/bin/ https://raw.githubusercontent.com/GeekerXu/kodexplorer/master/entrypoint.sh
+RUN chmod 777 /usr/local/bin/entrypoint.sh
 
-COPY entrypoint.sh /usr/local/bin/
+WORKDIR /var/www/html
 
 EXPOSE 80
 
